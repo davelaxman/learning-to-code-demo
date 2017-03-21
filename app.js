@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var livereload = require('livereload');
 
 var app = express();
 var hbs = require('hbs');
@@ -17,6 +18,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 hbsutils.registerWatchedPartials(__dirname + '/views/partials');
+
+var server = livereload.createServer({
+  port:3001
+});
+server.watch([__dirname + "/public",__dirname + "/views"]);
 
 
 // uncomment after placing your favicon in /public
